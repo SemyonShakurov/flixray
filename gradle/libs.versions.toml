@@ -1,6 +1,7 @@
 [versions]
 androidGradlePlugin = "7.4.0"
 kotlin = "1.7.21"
+hilt = "2.44.2"
 
 [libraries]
 # Dependencies of the included build-logic
@@ -10,3 +11,5 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
