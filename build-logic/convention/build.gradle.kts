@@ -20,5 +20,13 @@ gradlePlugin {
             id = "jintly.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidApplicationCompose") {
+            id = "jintly.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidHilt") {
+            id = "jintly.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
     }
 }
