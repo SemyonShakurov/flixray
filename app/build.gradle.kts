@@ -41,5 +41,5 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.runtime.tracing)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation("com.google.android.material:material:1.7.0") // TODO Delete
+    implementation(libs.androidx.core.splashscreen)
 }
