@@ -35,11 +35,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.runtime.tracing)
+    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.core.splashscreen)
 }

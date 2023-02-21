@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "jintly"
 include(":app")
+include(":core:data")

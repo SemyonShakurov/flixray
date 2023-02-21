@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jintly</string>
+    <string name="network_error">Нет подключения к интернету</string>
 </resources>

@@ -20,6 +20,10 @@ gradlePlugin {
             id = "jintly.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "jintly.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
         register("androidApplicationCompose") {
             id = "jintly.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
