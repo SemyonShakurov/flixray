@@ -2,6 +2,7 @@ package com.jintly.app.ui
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration.Indefinite
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jintly.app.R
+import com.jintly.app.navigation.AppNavHost
 import ru.jintly.core.data.utils.NetworkMonitor
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,6 +27,7 @@ fun App(
 ) {
     val appState = rememberAppState(networkMonitor = networkMonitor)
 
+    // connection checks
     val snackbarHostState = remember { SnackbarHostState() }
     val isOnline by appState.isOnline.collectAsStateWithLifecycle()
     val notConnectedMessage = stringResource(R.string.network_error)
@@ -38,11 +41,14 @@ fun App(
     }
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         containerColor = Color.Transparent,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-    ) { padding ->
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+    ) { innerPadding ->
+        AppNavHost(
+            modifier = Modifier.padding(innerPadding),
+            navController = appState.navController,
+        )
     }
 }

@@ -17,4 +17,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "jintly"
 include(":app")
+
 include(":core:data")
+
+include(":feature:player")
+include(":feature:public-sessions")

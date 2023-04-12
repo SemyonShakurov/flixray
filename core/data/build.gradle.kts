@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jintly.library.core.data"
+    namespace = "ru.jintly.core.data"
 }
 
 dependencies {

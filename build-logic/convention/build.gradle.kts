@@ -20,6 +20,10 @@ gradlePlugin {
             id = "jintly.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidFeature") {
+            id = "jintly.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
         register("androidLibrary") {
             id = "jintly.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
@@ -27,6 +31,10 @@ gradlePlugin {
         register("androidApplicationCompose") {
             id = "jintly.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidLibraryCompose") {
+            id = "jintly.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidHilt") {
             id = "jintly.android.hilt"
