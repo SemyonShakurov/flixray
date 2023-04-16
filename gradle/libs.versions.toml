@@ -16,6 +16,7 @@ kotlin = "1.8.0"
 kotlinxCoroutines = "1.6.4"
 hilt = "2.44.2"
 exoPlayer = "1.0.0-rc02"
+systemUiController = "0.30.1"
 
 [libraries]
 # Dependencies of the included build-logic
@@ -39,6 +40,7 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 exoPlayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "exoPlayer" }
 exoPlayer-dash = { group = "androidx.media3", name = "media3-exoplayer-dash", version.ref = "exoPlayer" }
 exoPlayer-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "exoPlayer" }
+systemUiController = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "systemUiController" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

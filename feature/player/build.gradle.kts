@@ -6,3 +6,10 @@ plugins {
 android {
     namespace = "ru.jintly.feature.player"
 }
+
+dependencies {
+    implementation(libs.exoPlayer)
+    implementation(libs.exoPlayer.dash)
+    implementation(libs.exoPlayer.ui)
+    implementation(libs.systemUiController)
+}
