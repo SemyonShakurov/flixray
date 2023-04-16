@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":feature:player"))
 
     implementation(project(":core:data"))
+    implementation(project(":core:network"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -48,4 +49,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.core.splashscreen)
+
+    implementation(libs.coil)
 }

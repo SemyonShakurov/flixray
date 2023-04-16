@@ -1,9 +1,14 @@
 package ru.jintly.core.network.di
 
+import android.content.Context
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.util.DebugLogger
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -51,4 +56,18 @@ object NetworkModule {
         )
         .build()
         .create(NetworkApi::class.java)
+
+    @Provides
+    @Singleton
+    fun providesImageLoader(
+        okHttpCallFactory: Call.Factory,
+        @ApplicationContext context: Context,
+    ): ImageLoader = ImageLoader.Builder(context)
+        .callFactory(okHttpCallFactory)
+        .components {
+            add(SvgDecoder.Factory())
+        }
+        .respectCacheHeaders(false)
+        .apply { logger(DebugLogger()) }
+        .build()
 }
