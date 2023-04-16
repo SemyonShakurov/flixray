@@ -19,6 +19,7 @@ rootProject.name = "jintly"
 include(":app")
 
 include(":core:data")
+include(":core:network")
 
 include(":feature:player")
 include(":feature:public-sessions")
