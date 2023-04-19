@@ -23,3 +23,4 @@ include(":core:network")
 
 include(":feature:player")
 include(":feature:public-sessions")
+include(":feature:auth")

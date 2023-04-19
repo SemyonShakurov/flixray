@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(project(":feature:public-sessions"))
     implementation(project(":feature:player"))
+    implementation(project(":feature:auth"))
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))
