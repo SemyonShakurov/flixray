@@ -21,7 +21,7 @@ fun AppNavHost(
         navController = navController,
         startDestination = startDestination,
     ) {
-        authGraph()
+        authGraph(navController)
         publicSessionsGraph(
             onToPlayerClick = {
                 navController.navigateToPlayer()
