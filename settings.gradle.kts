@@ -20,6 +20,7 @@ include(":app")
 
 include(":core:data")
 include(":core:network")
+include(":core:design-system")
 
 include(":feature:player")
 include(":feature:public-sessions")

@@ -6,3 +6,9 @@ plugins {
 android {
     namespace = "ru.jintly.feature.auth"
 }
+
+dependencies {
+    implementation(project(":core:design-system"))
+
+    implementation(libs.androidx.compose.icons)
+}

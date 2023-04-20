@@ -11,5 +11,4 @@ dependencies {
     implementation(libs.exoPlayer)
     implementation(libs.exoPlayer.hls)
     implementation(libs.exoPlayer.ui)
-    implementation(libs.systemUiController)
 }

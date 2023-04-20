@@ -41,6 +41,7 @@ dependencies {
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))
+    implementation(project(":core:design-system"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

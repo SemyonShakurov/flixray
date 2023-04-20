@@ -4,6 +4,7 @@ androidxComposeCompiler = "1.4.1"
 androidxComposeBom = "2023.01.00"
 androidxComposeRuntimeTracing = "1.0.0-alpha01"
 androidxComposeMaterial3 = "1.1.0-alpha06"
+androidxComposeIcons = "1.4.2"
 androidxActivity = "1.6.1"
 androidxAppCompat = "1.5.1"
 androidxCore = "1.9.0"
@@ -32,6 +33,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidxComposeRuntimeTracing" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidxComposeMaterial3" }
+androidx-compose-icons = { group = "androidx.compose.material", name = "material-icons-extended", version = "androidxComposeIcons" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "androidxUiTooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "androidxUiTooling" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
