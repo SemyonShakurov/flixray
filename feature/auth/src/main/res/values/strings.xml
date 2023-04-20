@@ -5,11 +5,11 @@
     <string name="auth_email">E-mail</string>
     <string name="auth_password">Пароль</string>
     <string name="auth_email_hint">Введите E-mail</string>
+    <string name="auth_password_hint">Введите пароль</string>
 
     <string name="auth_login_forgot_password">Забыли пароль?</string>
     <string name="auth_login_enter">Войти</string>
     <string name="auth_login_register">Зарегистрируйтесь!</string>
-    <string name="auth_login_password_hint">Введите пароль</string>
     <string name="auth_login_no_account">Еще нет аккаунта?</string>
 
     <string name="auth_register_enter_email">Укажите вашу\nэлектронную почту</string>
@@ -19,4 +19,6 @@
     <string name="auth_input_code_confirm">Подтвердить</string>
     
     <string name="auth_create_password_complete">Завершить регистрацию</string>
+    <string name="auth_create_password_title">Придумайте пароль</string>
+    <string name="auth_create_password_repeat_hint">Введите пароль еще раз</string>
 </resources>

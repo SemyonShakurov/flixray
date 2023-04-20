@@ -120,7 +120,7 @@ internal fun AuthLoginScreen(
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                 ),
-                placeholder = { Text(text = stringResource(id = R.string.auth_login_password_hint)) },
+                placeholder = { Text(text = stringResource(id = R.string.auth_password_hint)) },
                 visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 trailingIcon = {
