@@ -2,4 +2,8 @@
 <resources>
     <string name="auth_enter">Войти</string>
     <string name="auth_register">Зарегистрироваться</string>
+
+    <string name="auth_login_forgot_password">Забыли пароль?</string>
+    <string name="auth_login_enter">Войти</string>
+    <string name="auth_login_register">Зарегистрируйтесь!</string>
 </resources>

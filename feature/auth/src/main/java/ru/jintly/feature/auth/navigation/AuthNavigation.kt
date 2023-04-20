@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import ru.jintly.feature.auth.AuthMainRoute
 import ru.jintly.feature.auth.login.AuthLoginRoute
+import ru.jintly.feature.auth.passwordrecovery.AuthPasswordRecoveryRoute
 import ru.jintly.feature.auth.register.AuthRegisterRoute
 
 const val AUTH_GRAPH = "auth_graph"
@@ -14,6 +15,7 @@ const val AUTH_GRAPH = "auth_graph"
 private const val AUTH_MAIN_ROUTE = "auth_route"
 private const val AUTH_LOGIN_ROUTE = "auth_login_route"
 private const val AUTH_REGISTER_ROUTE = "auth_register_route"
+private const val AUTH_PASSWORD_RECOVERY_ROUTE = "auth_password_recovery_route"
 
 fun NavGraphBuilder.authGraph(
     navController: NavHostController,
@@ -33,10 +35,20 @@ fun NavGraphBuilder.authGraph(
             )
         }
         composable(route = AUTH_LOGIN_ROUTE) {
-            AuthLoginRoute()
+            AuthLoginRoute(
+                onForgotPasswordClick = {
+                    navController.navigateToPasswordRecovery()
+                },
+                onRegisterClick = {
+                    navController.navigateToRegister()
+                },
+            )
         }
         composable(route = AUTH_REGISTER_ROUTE) {
             AuthRegisterRoute()
+        }
+        composable(route = AUTH_PASSWORD_RECOVERY_ROUTE) {
+            AuthPasswordRecoveryRoute()
         }
     }
 }
@@ -47,4 +59,8 @@ private fun NavController.navigateToLogin() {
 
 private fun NavController.navigateToRegister() {
     this.navigate(route = AUTH_REGISTER_ROUTE)
+}
+
+private fun NavController.navigateToPasswordRecovery() {
+    this.navigate(route = AUTH_PASSWORD_RECOVERY_ROUTE)
 }
