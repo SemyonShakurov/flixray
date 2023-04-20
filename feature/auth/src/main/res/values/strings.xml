@@ -9,4 +9,7 @@
 
     <string name="auth_register_enter_email">Укажите вашу электронную почту</string>
     <string name="auth_register_send_code">Отправить код</string>
+
+    <string name="auth_input_code_message">Введите код подтверждения</string>
+    <string name="auth_input_code_confirm">Подтвердить</string>
 </resources>
