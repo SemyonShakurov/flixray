@@ -23,6 +23,7 @@ private const val AUTH_CREATE_PASSWORD_ROUTE = "auth_create_password_route"
 
 fun NavGraphBuilder.authGraph(
     navController: NavHostController,
+    onAuthSuccess: () -> Unit,
 ) {
     navigation(
         route = AUTH_GRAPH,
@@ -66,7 +67,7 @@ fun NavGraphBuilder.authGraph(
             )
         }
         composable(route = AUTH_CREATE_PASSWORD_ROUTE) {
-            AuthCreatePasswordRoute()
+            AuthCreatePasswordRoute(onAuthSuccess = onAuthSuccess)
         }
     }
 }

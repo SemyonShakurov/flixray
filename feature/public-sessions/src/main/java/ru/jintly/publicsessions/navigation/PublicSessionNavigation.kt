@@ -1,5 +1,6 @@
 package ru.jintly.publicsessions.navigation
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
@@ -7,6 +8,10 @@ import ru.jintly.publicsessions.presentation.PublicSessionsRoute
 
 const val PUBLIC_SESSIONS_GRAPH = "public_sessions_graph"
 private const val PUBLIC_SESSION_ROUTE = "public_session_route"
+
+fun NavController.navigateToPublicSessions() {
+    this.navigate(route = PUBLIC_SESSION_ROUTE)
+}
 
 fun NavGraphBuilder.publicSessionsGraph(
     onToPlayerClick: () -> Unit,

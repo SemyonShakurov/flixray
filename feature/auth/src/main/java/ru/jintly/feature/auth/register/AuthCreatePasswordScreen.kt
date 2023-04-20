@@ -42,12 +42,13 @@ import ru.jintly.feature.auth.R
 
 @Composable
 internal fun AuthCreatePasswordRoute(
+    onAuthSuccess: () -> Unit,
     viewModel: AuthCreatePasswordViewModel = hiltViewModel(),
 ) {
     AuthCreatePasswordScreen(
         onCompleteAuthClick = {
             viewModel.onCompleteAuthClick(
-                onAuthSuccess = {},
+                onAuthSuccess = onAuthSuccess,
             )
         },
     )

@@ -8,6 +8,7 @@ import ru.jintly.feature.auth.navigation.AUTH_GRAPH
 import ru.jintly.feature.auth.navigation.authGraph
 import ru.jintly.player.navigation.navigateToPlayer
 import ru.jintly.player.navigation.playerScreen
+import ru.jintly.publicsessions.navigation.navigateToPublicSessions
 import ru.jintly.publicsessions.navigation.publicSessionsGraph
 
 @Composable
@@ -21,7 +22,12 @@ fun AppNavHost(
         navController = navController,
         startDestination = startDestination,
     ) {
-        authGraph(navController)
+        authGraph(
+            navController = navController,
+            onAuthSuccess = {
+                navController.navigateToPublicSessions()
+            },
+        )
         publicSessionsGraph(
             onToPlayerClick = {
                 navController.navigateToPlayer()
