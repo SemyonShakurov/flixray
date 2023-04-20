@@ -26,7 +26,7 @@ fun NavGraphBuilder.authGraph(
 ) {
     navigation(
         route = AUTH_GRAPH,
-        startDestination = AUTH_MAIN_ROUTE,
+        startDestination = AUTH_LOGIN_ROUTE,
     ) {
         composable(route = AUTH_MAIN_ROUTE) {
             AuthMainRoute(

@@ -97,7 +97,7 @@ internal fun AuthLoginScreen(
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                 ),
-                placeholder = { Text(text = stringResource(id = R.string.auth_login_email_hint)) },
+                placeholder = { Text(text = stringResource(id = R.string.auth_email_hint)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             )
             Spacer(modifier = Modifier.height(20.dp))
