@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -97,9 +98,11 @@ internal fun AuthLoginScreen(
 )
 @Composable
 private fun AuthLoginScreenPreview() {
-    AuthLoginScreen(
-        onLoginClick = {},
-        onForgotPasswordClick = {},
-        onRegisterClick = {},
-    )
+    MaterialTheme {
+        AuthLoginScreen(
+            onLoginClick = {},
+            onForgotPasswordClick = {},
+            onRegisterClick = {},
+        )
+    }
 }

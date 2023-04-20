@@ -6,4 +6,7 @@
     <string name="auth_login_forgot_password">Забыли пароль?</string>
     <string name="auth_login_enter">Войти</string>
     <string name="auth_login_register">Зарегистрируйтесь!</string>
+
+    <string name="auth_register_enter_email">Укажите вашу электронную почту</string>
+    <string name="auth_register_send_code">Отправить код</string>
 </resources>
