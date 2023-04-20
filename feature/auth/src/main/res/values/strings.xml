@@ -12,4 +12,6 @@
 
     <string name="auth_input_code_message">Введите код подтверждения</string>
     <string name="auth_input_code_confirm">Подтвердить</string>
+    
+    <string name="auth_create_password_complete">Завершить регистрацию</string>
 </resources>
