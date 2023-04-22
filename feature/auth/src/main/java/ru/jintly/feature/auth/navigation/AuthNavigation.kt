@@ -47,6 +47,7 @@ fun NavGraphBuilder.authGraph(
                 onRegisterClick = {
                     navController.navigateToRegister()
                 },
+                onAuthSuccess = onAuthSuccess,
             )
         }
         composable(route = AUTH_REGISTER_ROUTE) {

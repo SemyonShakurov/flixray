@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "ru.jintly.feature.publicsessions"
 }
+
+dependencies {
+    implementation(project(":core:design-system"))
+}

@@ -7,14 +7,14 @@ import androidx.navigation.navigation
 import ru.jintly.publicsessions.presentation.PublicSessionsRoute
 
 const val PUBLIC_SESSIONS_GRAPH = "public_sessions_graph"
-private const val PUBLIC_SESSION_ROUTE = "public_session_route"
+const val PUBLIC_SESSION_ROUTE = "public_session_route"
 
 fun NavController.navigateToPublicSessions() {
     this.navigate(route = PUBLIC_SESSION_ROUTE)
 }
 
 fun NavGraphBuilder.publicSessionsGraph(
-    onToPlayerClick: () -> Unit,
+    onPublicSessionClick: () -> Unit,
     nestedGraphs: NavGraphBuilder.() -> Unit,
 ) {
     navigation(
@@ -23,7 +23,7 @@ fun NavGraphBuilder.publicSessionsGraph(
     ) {
         composable(route = PUBLIC_SESSION_ROUTE) {
             PublicSessionsRoute(
-                onToPlayerClick = onToPlayerClick,
+                onPublicSessionClick = onPublicSessionClick,
             )
         }
         nestedGraphs()

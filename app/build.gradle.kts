@@ -38,6 +38,8 @@ dependencies {
     implementation(project(":feature:public-sessions"))
     implementation(project(":feature:player"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:private-sessions"))
+    implementation(project(":feature:profile"))
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))

@@ -7,19 +7,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.jintly.core.designsystem.colors.BackgroundColor
+import ru.jintly.core.designsystem.colors.Background
 
 @Composable
 fun JintlyTheme(
     content: @Composable () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(BackgroundColor)
+    systemUiController.setSystemBarsColor(Background)
     MaterialTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundColor),
+                .background(Background),
         ) {
             content()
         }

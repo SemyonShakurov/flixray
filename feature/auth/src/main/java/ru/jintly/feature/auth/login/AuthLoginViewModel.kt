@@ -7,6 +7,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthLoginViewModel @Inject constructor() : ViewModel() {
 
-    fun onLoginClick() {
+    fun onLoginClick(onSuccess: () -> Unit) {
+        onSuccess()
     }
 }

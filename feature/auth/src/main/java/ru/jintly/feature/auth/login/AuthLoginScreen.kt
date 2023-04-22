@@ -48,10 +48,11 @@ import ru.jintly.feature.auth.R
 internal fun AuthLoginRoute(
     onForgotPasswordClick: () -> Unit,
     onRegisterClick: () -> Unit,
+    onAuthSuccess: () -> Unit,
     viewModel: AuthLoginViewModel = hiltViewModel(),
 ) {
     AuthLoginScreen(
-        onLoginClick = viewModel::onLoginClick,
+        onLoginClick = { viewModel.onLoginClick(onSuccess = { onAuthSuccess() }) },
         onForgotPasswordClick = onForgotPasswordClick,
         onRegisterClick = onRegisterClick,
     )

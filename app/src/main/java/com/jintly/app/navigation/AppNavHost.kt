@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import ru.jintly.feature.auth.navigation.AUTH_GRAPH
 import ru.jintly.feature.auth.navigation.authGraph
+import ru.jintly.feature.privatesessions.navigation.privateSessionsGraph
+import ru.jintly.feature.profile.navigation.profileGraph
 import ru.jintly.player.navigation.navigateToPlayer
 import ru.jintly.player.navigation.playerScreen
 import ru.jintly.publicsessions.navigation.navigateToPublicSessions
@@ -29,12 +31,12 @@ fun AppNavHost(
             },
         )
         publicSessionsGraph(
-            onToPlayerClick = {
-                navController.navigateToPlayer()
-            },
+            onPublicSessionClick = { navController.navigateToPlayer() },
             nestedGraphs = {
                 playerScreen()
             },
         )
+        privateSessionsGraph()
+        profileGraph()
     }
 }
