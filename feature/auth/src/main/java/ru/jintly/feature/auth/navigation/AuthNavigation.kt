@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import ru.jintly.feature.auth.AuthMainRoute
+import ru.jintly.feature.auth.accountinfo.AccountInfoRoute
+import ru.jintly.feature.auth.accountinfo.AvatarScreenRoute
 import ru.jintly.feature.auth.login.AuthLoginRoute
 import ru.jintly.feature.auth.passwordrecovery.AuthPasswordRecoveryRoute
 import ru.jintly.feature.auth.register.AuthCreatePasswordRoute
@@ -20,6 +22,8 @@ private const val AUTH_REGISTER_ROUTE = "auth_register_route"
 private const val AUTH_PASSWORD_RECOVERY_ROUTE = "auth_password_recovery_route"
 private const val AUTH_INPUT_CODE_ROUTE = "auth_input_code_route"
 private const val AUTH_CREATE_PASSWORD_ROUTE = "auth_create_password_route"
+private const val AUTH_ACCOUNT_INFO_ROUTE = "auth_account_info_route"
+private const val AUTH_AVATAR_ROUTE = "auth_avatar_route"
 
 fun NavGraphBuilder.authGraph(
     navController: NavHostController,
@@ -68,7 +72,17 @@ fun NavGraphBuilder.authGraph(
             )
         }
         composable(route = AUTH_CREATE_PASSWORD_ROUTE) {
-            AuthCreatePasswordRoute(onAuthSuccess = onAuthSuccess)
+            AuthCreatePasswordRoute(onAuthSuccess = {
+                navController.navigateToAccountInfo()
+            })
+        }
+        composable(route = AUTH_ACCOUNT_INFO_ROUTE) {
+            AccountInfoRoute(
+                onProfileInfoInputComplete = { navController.navigateToAvatar() },
+            )
+        }
+        composable(route = AUTH_AVATAR_ROUTE) {
+            AvatarScreenRoute(onAuthSuccess)
         }
     }
 }
@@ -91,4 +105,12 @@ private fun NavController.navigateToInputCode() {
 
 private fun NavController.navigateToCreatePassword() {
     this.navigate(route = AUTH_CREATE_PASSWORD_ROUTE)
+}
+
+private fun NavController.navigateToAccountInfo() {
+    this.navigate(route = AUTH_ACCOUNT_INFO_ROUTE)
+}
+
+private fun NavController.navigateToAvatar() {
+    this.navigate(route = AUTH_AVATAR_ROUTE)
 }

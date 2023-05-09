@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:design-system"))
+
     implementation(libs.exoPlayer)
     implementation(libs.exoPlayer.hls)
     implementation(libs.exoPlayer.ui)

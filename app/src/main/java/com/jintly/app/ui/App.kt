@@ -74,7 +74,7 @@ fun App(
         navController.currentBackStackEntryFlow.collect { backStackEntry ->
             topTitle = when {
                 backStackEntry.destination.route.toString() == TopLevelScreen.PublicSessions.route -> "Главная"
-                backStackEntry.destination.route.toString() == TopLevelScreen.PrivateSessions.route -> "Комнаты"
+                backStackEntry.destination.route.toString() == TopLevelScreen.PrivateSessions.route -> "Создать комнату"
                 backStackEntry.destination.route.toString() == TopLevelScreen.Profile.route -> "Профиль"
                 else -> ""
             }

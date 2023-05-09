@@ -10,12 +10,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -32,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.jintly.core.designsystem.colors.Background
 import ru.jintly.core.designsystem.colors.Primary
 import ru.jintly.core.designsystem.colors.Secondary
 import ru.jintly.feature.publicsessions.R
@@ -60,29 +59,64 @@ internal fun PublicSessionsScreen(
         val sessions = uiState.sessions
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
-            items(sessions) { session ->
-                SessionRow(session = session, onPublicSessionClick)
+            item {
+                Text(
+                    modifier = Modifier.padding(start = 16.dp),
+                    text = "Приватные сессии",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                )
+            }
+            item {
+                SessionRow(session = sessions[0], onPublicSessionClick, "еще 8 мин", 0.2f)
+            }
+            item {
+                Text(
+                    modifier = Modifier.padding(start = 16.dp),
+                    text = "Публичные сессии",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                )
+            }
+            item {
+                SessionRow(session = sessions[0], onPublicSessionClick, "еще 8 мин", 0.2f)
+            }
+            item {
+                SessionRow(session = sessions[1], onPublicSessionClick, "еще 11 мин", 0.6f)
+            }
+            item {
+                SessionRow(session = sessions[2], onPublicSessionClick, "еще 15 мин", 0.1f)
             }
         }
     }
 }
 
 @Composable
-private fun SessionRow(session: PublicSessionData, onPublicSessionClick: () -> Unit) {
+private fun SessionRow(
+    session: PublicSessionData,
+    onPublicSessionClick: () -> Unit,
+    text: String,
+    progress: Float,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onPublicSessionClick() },
+            .clickable { onPublicSessionClick() }
+            .clip(CircleShape)
+            .background(Secondary)
+            .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
             modifier = Modifier
-                .size(60.dp)
+                .size(68.dp)
                 .clip(CircleShape)
-                .background(Secondary),
+                .background(Background),
         ) {
             Icon(
                 modifier = Modifier.align(Alignment.Center),
@@ -93,29 +127,41 @@ private fun SessionRow(session: PublicSessionData, onPublicSessionClick: () -> U
         }
         Spacer(modifier = Modifier.width(16.dp))
         Column {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = session.title,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
-            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = session.title,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+            )
             Row {
                 LinearProgressIndicator(
                     modifier = Modifier
-                        .width(200.dp)
+                        .width(100.dp)
                         .padding(top = 8.dp),
-                    progress = 0.7f,
+                    progress = progress,
                     color = Primary,
+                    trackColor = Background,
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "еще 53 мин",
+                    text = text,
                     color = Color.White,
                     fontSize = 12.sp,
                 )
             }
         }
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = "0",
+            color = Primary,
+            fontSize = 20.sp,
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Icon(
+            modifier = Modifier.size(28.dp),
+            painter = painterResource(id = R.drawable.ic_people),
+            contentDescription = null,
+            tint = Primary,
+        )
+        Spacer(modifier = Modifier.width(24.dp))
     }
 }

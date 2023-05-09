@@ -36,7 +36,7 @@ fun AppNavHost(
                 playerScreen()
             },
         )
-        privateSessionsGraph()
+        privateSessionsGraph(navController) { navController.navigateToPlayer() }
         profileGraph()
     }
 }

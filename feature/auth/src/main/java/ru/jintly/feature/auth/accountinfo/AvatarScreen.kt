@@ -1,6 +1,7 @@
-package ru.jintly.feature.profile
+package ru.jintly.feature.auth.accountinfo
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,18 +21,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.jintly.core.designsystem.R.drawable
 import ru.jintly.core.designsystem.colors.Background
+import ru.jintly.core.designsystem.colors.Primary
 import ru.jintly.core.designsystem.colors.Secondary
 
 @Composable
-internal fun ProfileRoute() {
-    ProfileScreen()
+internal fun AvatarScreenRoute(
+    onComplete: () -> Unit,
+) {
+    AvatarScreen(onComplete)
 }
 
 @Composable
-internal fun ProfileScreen(
+internal fun AvatarScreen(
+    onComplete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -39,6 +47,7 @@ internal fun ProfileScreen(
             .fillMaxSize()
             .padding(vertical = 24.dp, horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
         Box(
             modifier = Modifier
@@ -50,22 +59,27 @@ internal fun ProfileScreen(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .fillMaxSize(),
-                painter = painterResource(id = ru.jintly.core.designsystem.R.drawable.ic_profile_placeholder),
+                painter = painterResource(id = drawable.ic_profile_placeholder),
                 contentDescription = null,
                 tint = Secondary,
             )
         }
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Имя профиля",
-            fontSize = 20.sp,
+            text = "Выберете аватар для вашего профиля",
             color = Color.White,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp),
+            onClick = onComplete,
             colors = ButtonDefaults.buttonColors(
-                containerColor = Secondary,
+                containerColor = Primary,
             ),
         ) {
             Text(
@@ -73,31 +87,21 @@ internal fun ProfileScreen(
                 fontSize = 16.sp,
             )
         }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp),
+            onClick = onComplete,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Secondary,
             ),
         ) {
             Text(
-                text = "Сменить имя профиля",
+                text = "Позже",
                 fontSize = 16.sp,
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFE34848),
-            ),
-        ) {
-            Text(
-                text = "Выйти",
-                fontSize = 16.sp,
-            )
-        }
+        Spacer(modifier = Modifier.height(60.dp))
     }
 }

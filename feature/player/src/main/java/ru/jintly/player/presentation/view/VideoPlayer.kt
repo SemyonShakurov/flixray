@@ -36,7 +36,7 @@ internal fun VideoPlayer(
     val context = LocalContext.current
 
     val mediaItem = MediaItem.Builder()
-        .setUri("http://81.200.150.77:8082/minecraft/output.m3u8")
+        .setUri("https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8")
         .setLiveConfiguration(MediaItem.LiveConfiguration.Builder().build())
         .build()
 

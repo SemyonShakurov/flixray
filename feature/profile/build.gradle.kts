@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "ru.jintly.feature.profile"
 }
+
+dependencies {
+    implementation(project(":core:design-system"))
+}

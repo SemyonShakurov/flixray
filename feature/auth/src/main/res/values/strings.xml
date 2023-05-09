@@ -21,4 +21,7 @@
     <string name="auth_create_password_complete">Завершить регистрацию</string>
     <string name="auth_create_password_title">Придумайте пароль</string>
     <string name="auth_create_password_repeat_hint">Введите пароль еще раз</string>
+    
+    <string name="auth_recovery_title">Восстановление пароля:\nВведите электронную почту</string>
+    <string name="auth_recovery_button">Сбросить пароль</string>
 </resources>
