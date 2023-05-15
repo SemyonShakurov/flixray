@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -70,8 +69,11 @@ internal fun PrivateSessionsScreen(
                         fontWeight = FontWeight.Bold,
                     )
                 }
-                items(movies) { movie ->
-                    VideoListRaw(moviesPair = movie, onMovieClick = onMovieClick)
+//                items(movies) { movie ->
+//                    VideoListRaw(moviesPair = movie, onMovieClick = onMovieClick)
+//                }
+                item {
+                    VideoListRaw(moviesPair = Pair(VideoListItem(title = "Властелин колец"), VideoListItem("video 2")), onMovieClick = onMovieClick)
                 }
             }
         }
@@ -89,7 +91,9 @@ private fun VideoListRaw(
     Row(modifier = Modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.width(16.dp))
         Column(
-            modifier = Modifier.weight(1f).clickable { onMovieClick() },
+            modifier = Modifier
+                .weight(1f)
+                .clickable { onMovieClick() },
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
@@ -107,7 +111,9 @@ private fun VideoListRaw(
         }
         Spacer(modifier = Modifier.width(16.dp))
         Column(
-            modifier = Modifier.weight(1f).clickable { onMovieClick() },
+            modifier = Modifier
+                .weight(1f)
+                .clickable { onMovieClick() },
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(

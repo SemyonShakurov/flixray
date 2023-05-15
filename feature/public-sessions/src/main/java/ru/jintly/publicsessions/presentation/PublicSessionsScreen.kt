@@ -72,7 +72,7 @@ internal fun PublicSessionsScreen(
                 )
             }
             item {
-                SessionRow(session = sessions[0], onPublicSessionClick, "еще 8 мин", 0.2f)
+                SessionRow(session = PublicSessionData(title = "Смотрим фильм", image = null, uri = ""), onPublicSessionClick, "еще 1ч 29 мин", 0.2f)
             }
             item {
                 Text(

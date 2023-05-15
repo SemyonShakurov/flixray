@@ -3,6 +3,6 @@
     <string name="network_error">Нет подключения к интернету</string>
 
     <string name="bottom_bar_public_sessions">Главная</string>
-    <string name="bottom_bar_private_sessions">Комнаты</string>
+    <string name="bottom_bar_private_sessions">Создать комнату</string>
     <string name="bottom_bar_profile">Профиль</string>
 </resources>

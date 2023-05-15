@@ -52,7 +52,7 @@ internal fun InputRoomNameScreen(
         Spacer(modifier = Modifier.height(200.dp))
         Text(
             modifier = Modifier.align(Alignment.Start),
-            text = "Выберите имя для команты",
+            text = "Выберите название для комнаты",
             color = Color.White,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
@@ -78,7 +78,7 @@ internal fun InputRoomNameScreen(
             ),
             placeholder = {
                 Text(
-                    text = "Введите имя комнаты",
+                    text = "Введите название комнаты",
                 )
             },
         )

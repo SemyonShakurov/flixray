@@ -18,8 +18,8 @@ class InvitePeopleViewModel @Inject constructor() : ViewModel() {
     init {
         profiles = mutableListOf(
             ProfileInfo("user 1"),
-            ProfileInfo("user 2"),
-            ProfileInfo("user 3"),
+//            ProfileInfo("user 2"),
+//            ProfileInfo("user 3"),
         )
         _uiState.value = InvitePeopleUiState.Success(profiles!!)
     }
