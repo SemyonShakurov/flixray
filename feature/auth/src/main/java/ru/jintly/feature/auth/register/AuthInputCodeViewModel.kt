@@ -1,15 +1,32 @@
 package ru.jintly.feature.auth.register
 
-import android.os.SystemClock
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import ru.jintly.feature.auth.repository.AuthRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthInputCodeViewModel @Inject constructor() : ViewModel() {
+class AuthInputCodeViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
 
-    fun onConfirmCodeClick(onConfirmCodeSuccess: () -> Unit) {
-        SystemClock.sleep(1000)
-        onConfirmCodeSuccess()
+    private val email: String? = savedStateHandle["email"]
+
+    fun onConfirmCodeClick(
+        code: Int,
+        onConfirmCodeSuccess: () -> Unit,
+    ) {
+        viewModelScope.launch {
+            try {
+                authRepository.confirmCode(email ?: "", code)
+                onConfirmCodeSuccess()
+            } catch (e: Throwable) {
+                val a = e
+            }
+        }
     }
 }

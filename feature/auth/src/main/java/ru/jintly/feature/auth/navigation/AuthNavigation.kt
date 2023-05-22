@@ -3,7 +3,9 @@ package ru.jintly.feature.auth.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import ru.jintly.feature.auth.AuthMainRoute
 import ru.jintly.feature.auth.accountinfo.AccountInfoRoute
@@ -20,7 +22,7 @@ private const val AUTH_MAIN_ROUTE = "auth_route"
 private const val AUTH_LOGIN_ROUTE = "auth_login_route"
 private const val AUTH_REGISTER_ROUTE = "auth_register_route"
 private const val AUTH_PASSWORD_RECOVERY_ROUTE = "auth_password_recovery_route"
-private const val AUTH_INPUT_CODE_ROUTE = "auth_input_code_route"
+private const val AUTH_INPUT_CODE_ROUTE = "auth_input_code_route/{email}"
 private const val AUTH_CREATE_PASSWORD_ROUTE = "auth_create_password_route"
 private const val AUTH_ACCOUNT_INFO_ROUTE = "auth_account_info_route"
 private const val AUTH_AVATAR_ROUTE = "auth_avatar_route"
@@ -56,15 +58,18 @@ fun NavGraphBuilder.authGraph(
         }
         composable(route = AUTH_REGISTER_ROUTE) {
             AuthRegisterRoute(
-                onSendCodeSuccess = {
-                    navController.navigateToInputCode()
+                onSendCodeSuccess = { email ->
+                    navController.navigateToInputCode(email)
                 },
             )
         }
         composable(route = AUTH_PASSWORD_RECOVERY_ROUTE) {
             AuthPasswordRecoveryRoute()
         }
-        composable(route = AUTH_INPUT_CODE_ROUTE) {
+        composable(
+            route = AUTH_INPUT_CODE_ROUTE,
+            arguments = listOf(navArgument("email") { type = NavType.StringType }),
+        ) {
             AuthInputCodeRoute(
                 onConfirmCodeSuccess = {
                     navController.navigateToCreatePassword()
@@ -99,8 +104,8 @@ private fun NavController.navigateToPasswordRecovery() {
     this.navigate(route = AUTH_PASSWORD_RECOVERY_ROUTE)
 }
 
-private fun NavController.navigateToInputCode() {
-    this.navigate(route = AUTH_INPUT_CODE_ROUTE)
+private fun NavController.navigateToInputCode(email: String) {
+    this.navigate(route = "auth_input_code_route/$email")
 }
 
 private fun NavController.navigateToCreatePassword() {

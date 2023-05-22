@@ -1,5 +1,6 @@
 package ru.jintly.feature.privatesessions
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,7 +77,26 @@ internal fun PrivateSessionsScreen(
 //                    VideoListRaw(moviesPair = movie, onMovieClick = onMovieClick)
 //                }
                 item {
-                    VideoListRaw(moviesPair = Pair(VideoListItem(title = "Властелин колец"), VideoListItem("video 2")), onMovieClick = onMovieClick)
+                    VideoListRaw(
+                        moviesPair = Pair(
+                            VideoListItem(title = "Minecraft"),
+                            VideoListItem("Parkour"),
+                        ),
+                        onMovieClick = onMovieClick,
+                        painter1 = painterResource(id = R.drawable.movie_1),
+                        painter2 = painterResource(id = R.drawable.movie_2),
+                    )
+                }
+                item {
+                    VideoListRaw(
+                        moviesPair = Pair(
+                            VideoListItem(title = "NASA"),
+                            VideoListItem("Tears of steel"),
+                        ),
+                        onMovieClick = onMovieClick,
+                        painter1 = painterResource(id = R.drawable.movie_3),
+                        painter2 = painterResource(id = R.drawable.movie_4),
+                    )
                 }
             }
         }
@@ -84,6 +107,8 @@ internal fun PrivateSessionsScreen(
 private fun VideoListRaw(
     moviesPair: Pair<VideoListItem, VideoListItem?>,
     onMovieClick: () -> Unit,
+    painter1: Painter,
+    painter2: Painter,
 ) {
     val first = moviesPair.first
     val second = moviesPair.second
@@ -98,10 +123,17 @@ private fun VideoListRaw(
         ) {
             Box(
                 modifier = Modifier
-                    .size(width = 156.dp, 92.dp)
+                    .size(width = 172.dp, 100.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .background(Secondary),
-            )
+            ) {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painter1,
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                )
+            }
             Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = first.title,
@@ -118,10 +150,17 @@ private fun VideoListRaw(
         ) {
             Box(
                 modifier = Modifier
-                    .size(width = 156.dp, 92.dp)
+                    .size(width = 172.dp, 100.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .background(Secondary),
-            )
+            ) {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painter2,
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                )
+            }
             Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = second?.title ?: "movie ?",

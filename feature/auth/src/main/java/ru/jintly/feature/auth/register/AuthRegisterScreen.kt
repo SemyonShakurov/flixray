@@ -35,12 +35,13 @@ import ru.jintly.feature.auth.R
 
 @Composable
 internal fun AuthRegisterRoute(
-    onSendCodeSuccess: () -> Unit,
+    onSendCodeSuccess: (String) -> Unit,
     viewModel: AuthRegisterViewModel = hiltViewModel(),
 ) {
     AuthRegisterScreen(
-        onSendCodeClick = {
+        onSendCodeClick = { email ->
             viewModel.onSendCodeClick(
+                email,
                 onSendCodeSuccess = onSendCodeSuccess,
             )
         },
@@ -51,7 +52,7 @@ internal fun AuthRegisterRoute(
 @Composable
 internal fun AuthRegisterScreen(
     modifier: Modifier = Modifier,
-    onSendCodeClick: () -> Unit,
+    onSendCodeClick: (String) -> Unit,
 ) {
     var email by remember { mutableStateOf("") }
 
@@ -88,7 +89,7 @@ internal fun AuthRegisterScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            onClick = onSendCodeClick,
+            onClick = { onSendCodeClick(email) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Primary,
             ),

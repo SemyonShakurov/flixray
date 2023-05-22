@@ -8,8 +8,10 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthRegisterViewModel @Inject constructor() : ViewModel() {
 
-    fun onSendCodeClick(onSendCodeSuccess: () -> Unit) {
+    fun onSendCodeClick(email: String, onSendCodeSuccess: (String) -> Unit) {
         SystemClock.sleep(1000)
-        onSendCodeSuccess()
+        if (email.isNotBlank()) {
+            onSendCodeSuccess(email)
+        }
     }
 }

@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.DefaultLivePlaybackSpeedControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.ui.PlayerView
@@ -42,8 +41,7 @@ internal fun VideoPlayer(
 
     val exoPlayer = remember {
         ExoPlayer.Builder(context)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(context).setLiveTargetOffsetMs(5000))
-            .setLivePlaybackSpeedControl(DefaultLivePlaybackSpeedControl.Builder().build())
+            .setMediaSourceFactory(DefaultMediaSourceFactory(context).setLiveTargetOffsetMs(10000))
             .build()
             .apply {
                 this.setMediaItem(mediaItem)

@@ -9,6 +9,9 @@ android {
 
 dependencies {
     implementation(project(":core:design-system"))
+    implementation(project(":core:network"))
 
     implementation(libs.androidx.compose.icons)
+    implementation(libs.retrofit.core)
+    implementation(libs.coil.compose)
 }

@@ -1,5 +1,6 @@
 package ru.jintly.player.presentation
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,6 +39,7 @@ import ru.jintly.core.designsystem.colors.Background
 import ru.jintly.core.designsystem.colors.Primary
 import ru.jintly.core.designsystem.colors.Secondary
 import ru.jintly.feature.player.R
+import ru.jintly.feature.player.R.drawable
 import ru.jintly.player.presentation.data.Message
 import ru.jintly.player.presentation.view.VideoPlayer
 
@@ -54,19 +57,47 @@ internal fun PlayerRoute(
 internal fun PlayerScreen(
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
-        VideoPlayer(
+    var isVisible by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = modifier
+            .animateContentSize()
+            .fillMaxSize(),
+    ) {
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f, fill = true)
                 .background(Color.Black),
-        )
-        Chat(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(2f)
-                .background(Background),
-        )
+        ) {
+            VideoPlayer(
+                modifier = Modifier
+                    .fillMaxSize(),
+            )
+            IconButton(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 12.dp, bottom = 12.dp)
+                    .size(32.dp),
+                onClick = { isVisible = !isVisible },
+            ) {
+                Icon(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(id = drawable.ic_chat),
+                    contentDescription = null,
+                    tint = Color.White,
+                )
+            }
+        }
+        if (isVisible) {
+            Chat(
+                modifier = Modifier
+                    .animateContentSize()
+                    .fillMaxWidth()
+                    .weight(2f)
+                    .background(Background),
+            )
+        }
     }
 }
 
@@ -120,7 +151,9 @@ private fun Chat(
                 shape = RoundedCornerShape(24.dp),
                 trailingIcon = {
                     Icon(
-                        modifier = Modifier.size(24.dp).clickable { },
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { },
                         painter = painterResource(id = R.drawable.ic_send),
                         tint = Primary,
                         contentDescription = null,

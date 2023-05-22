@@ -38,8 +38,9 @@ internal fun AuthInputCodeRoute(
     viewModel: AuthInputCodeViewModel = hiltViewModel(),
 ) {
     AuthInputCodeScreen(
-        onConfirmCodeClick = {
+        onConfirmCodeClick = { code ->
             viewModel.onConfirmCodeClick(
+                code,
                 onConfirmCodeSuccess = onConfirmCodeSuccess,
             )
         },
@@ -50,7 +51,7 @@ internal fun AuthInputCodeRoute(
 @Composable
 internal fun AuthInputCodeScreen(
     modifier: Modifier = Modifier,
-    onConfirmCodeClick: () -> Unit,
+    onConfirmCodeClick: (Int) -> Unit,
 ) {
     var code by remember { mutableStateOf("") }
 
@@ -101,7 +102,7 @@ internal fun AuthInputCodeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            onClick = onConfirmCodeClick,
+            onClick = { onConfirmCodeClick(code.toIntOrNull() ?: 0) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Primary,
             ),

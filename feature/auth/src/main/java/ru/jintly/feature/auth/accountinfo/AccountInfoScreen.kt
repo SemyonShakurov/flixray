@@ -10,7 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -23,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.jintly.core.designsystem.colors.Primary
@@ -54,7 +52,7 @@ internal fun AccountInfoScreen(
         Spacer(modifier = Modifier.height(200.dp))
         Text(
             modifier = Modifier.align(Alignment.Start),
-            text = "Регистрация прошла успешно!\nВыберете имя вашего профиля",
+            text = "Регистрация прошла успешно!\nВыберите имя вашего профиля",
             color = Color.White,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
@@ -72,11 +70,6 @@ internal fun AccountInfoScreen(
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
                 cursorColor = Color.Transparent,
-            ),
-            textStyle = LocalTextStyle.current.copy(
-                textAlign = TextAlign.Center,
-                fontSize = 20.sp,
-                letterSpacing = 12.sp,
             ),
             placeholder = {
                 Text(
