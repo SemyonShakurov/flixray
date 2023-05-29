@@ -34,7 +34,7 @@ import ru.jintly.feature.auth.R.string
 
 @Composable
 internal fun AuthInputCodeRoute(
-    onConfirmCodeSuccess: () -> Unit,
+    onConfirmCodeSuccess: (String) -> Unit,
     viewModel: AuthInputCodeViewModel = hiltViewModel(),
 ) {
     AuthInputCodeScreen(

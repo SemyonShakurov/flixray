@@ -35,7 +35,7 @@ import ru.jintly.feature.auth.R
 
 @Composable
 internal fun AuthRegisterRoute(
-    onSendCodeSuccess: (String) -> Unit,
+    onSendCodeSuccess: (Int, String) -> Unit,
     viewModel: AuthRegisterViewModel = hiltViewModel(),
 ) {
     AuthRegisterScreen(

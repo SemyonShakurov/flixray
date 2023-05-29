@@ -24,14 +24,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.jintly.core.designsystem.colors.Primary
 
 @Composable
 internal fun AccountInfoRoute(
     onProfileInfoInputComplete: () -> Unit,
+    viewModel: AccountInfoViewModel = hiltViewModel(),
 ) {
     AccountInfoScreen(
-        onProfileInfoInputComplete = onProfileInfoInputComplete,
+        onProfileInfoInputComplete = { profileName ->
+            viewModel.onAuthCompleteClick(
+                profileName,
+                onProfileInfoInputComplete,
+            )
+        },
     )
 }
 
@@ -39,7 +46,7 @@ internal fun AccountInfoRoute(
 @Composable
 internal fun AccountInfoScreen(
     modifier: Modifier = Modifier,
-    onProfileInfoInputComplete: () -> Unit,
+    onProfileInfoInputComplete: (String) -> Unit,
 ) {
     var profileName by remember { mutableStateOf("") }
 
@@ -49,10 +56,10 @@ internal fun AccountInfoScreen(
             .padding(vertical = 24.dp, horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.height(200.dp))
+        Spacer(modifier = Modifier.height(220.dp))
         Text(
             modifier = Modifier.align(Alignment.Start),
-            text = "Регистрация прошла успешно!\nВыберите имя вашего профиля",
+            text = "Выберите имя вашего профиля",
             color = Color.White,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
@@ -82,13 +89,17 @@ internal fun AccountInfoScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            onClick = onProfileInfoInputComplete,
+            onClick = {
+                if (profileName.isNotBlank()) {
+                    onProfileInfoInputComplete(profileName)
+                }
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Primary,
             ),
         ) {
             Text(
-                text = "Продолжить",
+                text = "Завершить регистрацию",
                 fontSize = 16.sp,
             )
         }

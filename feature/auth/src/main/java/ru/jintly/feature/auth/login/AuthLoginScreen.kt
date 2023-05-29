@@ -52,7 +52,9 @@ internal fun AuthLoginRoute(
     viewModel: AuthLoginViewModel = hiltViewModel(),
 ) {
     AuthLoginScreen(
-        onLoginClick = { viewModel.onLoginClick(onSuccess = { onAuthSuccess() }) },
+        onLoginClick = { email, password ->
+            viewModel.onLoginClick(email, password, onSuccess = { onAuthSuccess() })
+        },
         onForgotPasswordClick = onForgotPasswordClick,
         onRegisterClick = onRegisterClick,
     )
@@ -62,7 +64,7 @@ internal fun AuthLoginRoute(
 @Composable
 internal fun AuthLoginScreen(
     modifier: Modifier = Modifier,
-    onLoginClick: () -> Unit,
+    onLoginClick: (String, String) -> Unit,
     onForgotPasswordClick: () -> Unit,
     onRegisterClick: () -> Unit,
 ) {
@@ -152,7 +154,11 @@ internal fun AuthLoginScreen(
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
                     .height(52.dp),
-                onClick = onLoginClick,
+                onClick = {
+                    if (email.isNotBlank() && password.isNotBlank()) {
+                        onLoginClick(email, password)
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Primary,
                 ),
@@ -189,7 +195,7 @@ internal fun AuthLoginScreen(
 private fun AuthLoginScreenPreview() {
     JintlyTheme {
         AuthLoginScreen(
-            onLoginClick = {},
+            onLoginClick = { _, _ -> },
             onForgotPasswordClick = {},
             onRegisterClick = {},
         )

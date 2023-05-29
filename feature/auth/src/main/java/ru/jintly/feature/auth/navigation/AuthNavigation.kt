@@ -22,9 +22,9 @@ private const val AUTH_MAIN_ROUTE = "auth_route"
 private const val AUTH_LOGIN_ROUTE = "auth_login_route"
 private const val AUTH_REGISTER_ROUTE = "auth_register_route"
 private const val AUTH_PASSWORD_RECOVERY_ROUTE = "auth_password_recovery_route"
-private const val AUTH_INPUT_CODE_ROUTE = "auth_input_code_route/{email}"
-private const val AUTH_CREATE_PASSWORD_ROUTE = "auth_create_password_route"
-private const val AUTH_ACCOUNT_INFO_ROUTE = "auth_account_info_route"
+private const val AUTH_INPUT_CODE_ROUTE = "auth_input_code_route/{code}/{email}"
+private const val AUTH_CREATE_PASSWORD_ROUTE = "auth_create_password_route/{email}"
+private const val AUTH_ACCOUNT_INFO_ROUTE = "auth_account_info_route/{password}/{email}"
 private const val AUTH_AVATAR_ROUTE = "auth_avatar_route"
 
 fun NavGraphBuilder.authGraph(
@@ -58,8 +58,8 @@ fun NavGraphBuilder.authGraph(
         }
         composable(route = AUTH_REGISTER_ROUTE) {
             AuthRegisterRoute(
-                onSendCodeSuccess = { email ->
-                    navController.navigateToInputCode(email)
+                onSendCodeSuccess = { code, email ->
+                    navController.navigateToInputCode(code, email)
                 },
             )
         }
@@ -68,20 +68,32 @@ fun NavGraphBuilder.authGraph(
         }
         composable(
             route = AUTH_INPUT_CODE_ROUTE,
-            arguments = listOf(navArgument("email") { type = NavType.StringType }),
+            arguments = listOf(
+                navArgument("code") { type = NavType.IntType },
+                navArgument("email") { type = NavType.StringType },
+            ),
         ) {
             AuthInputCodeRoute(
-                onConfirmCodeSuccess = {
-                    navController.navigateToCreatePassword()
+                onConfirmCodeSuccess = { email ->
+                    navController.navigateToCreatePassword(email)
                 },
             )
         }
-        composable(route = AUTH_CREATE_PASSWORD_ROUTE) {
-            AuthCreatePasswordRoute(onAuthSuccess = {
-                navController.navigateToAccountInfo()
+        composable(
+            route = AUTH_CREATE_PASSWORD_ROUTE,
+            arguments = listOf(navArgument("email") { type = NavType.StringType }),
+        ) {
+            AuthCreatePasswordRoute(onAuthSuccess = { password, email ->
+                navController.navigateToAccountInfo(password, email)
             })
         }
-        composable(route = AUTH_ACCOUNT_INFO_ROUTE) {
+        composable(
+            route = AUTH_ACCOUNT_INFO_ROUTE,
+            arguments = listOf(
+                navArgument("password") { type = NavType.StringType },
+                navArgument("email") { type = NavType.StringType },
+            ),
+        ) {
             AccountInfoRoute(
                 onProfileInfoInputComplete = { navController.navigateToAvatar() },
             )
@@ -104,16 +116,16 @@ private fun NavController.navigateToPasswordRecovery() {
     this.navigate(route = AUTH_PASSWORD_RECOVERY_ROUTE)
 }
 
-private fun NavController.navigateToInputCode(email: String) {
-    this.navigate(route = "auth_input_code_route/$email")
+private fun NavController.navigateToInputCode(code: Int, email: String) {
+    this.navigate(route = "auth_input_code_route/$code/$email")
 }
 
-private fun NavController.navigateToCreatePassword() {
-    this.navigate(route = AUTH_CREATE_PASSWORD_ROUTE)
+private fun NavController.navigateToCreatePassword(email: String) {
+    this.navigate(route = "auth_create_password_route/$email")
 }
 
-private fun NavController.navigateToAccountInfo() {
-    this.navigate(route = AUTH_ACCOUNT_INFO_ROUTE)
+private fun NavController.navigateToAccountInfo(password: String, email: String) {
+    this.navigate(route = "auth_account_info_route/$password/$email")
 }
 
 private fun NavController.navigateToAvatar() {

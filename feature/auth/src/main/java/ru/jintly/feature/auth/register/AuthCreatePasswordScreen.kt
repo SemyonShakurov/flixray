@@ -42,12 +42,13 @@ import ru.jintly.feature.auth.R
 
 @Composable
 internal fun AuthCreatePasswordRoute(
-    onAuthSuccess: () -> Unit,
+    onAuthSuccess: (String, String) -> Unit,
     viewModel: AuthCreatePasswordViewModel = hiltViewModel(),
 ) {
     AuthCreatePasswordScreen(
-        onCompleteAuthClick = {
+        onCompleteAuthClick = { password ->
             viewModel.onCompleteAuthClick(
+                password,
                 onAuthSuccess = onAuthSuccess,
             )
         },
@@ -58,7 +59,7 @@ internal fun AuthCreatePasswordRoute(
 @Composable
 internal fun AuthCreatePasswordScreen(
     modifier: Modifier = Modifier,
-    onCompleteAuthClick: () -> Unit,
+    onCompleteAuthClick: (String) -> Unit,
 ) {
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
@@ -139,7 +140,7 @@ internal fun AuthCreatePasswordScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            onClick = onCompleteAuthClick,
+            onClick = { onCompleteAuthClick(password) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Primary,
             ),

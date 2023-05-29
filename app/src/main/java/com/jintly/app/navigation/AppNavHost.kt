@@ -31,12 +31,12 @@ fun AppNavHost(
             },
         )
         publicSessionsGraph(
-            onPublicSessionClick = { navController.navigateToPlayer() },
+            onPublicSessionClick = { navController.navigateToPlayer(false, false) },
             nestedGraphs = {
                 playerScreen()
             },
         )
-        privateSessionsGraph(navController) { navController.navigateToPlayer() }
+        privateSessionsGraph(navController) { navController.navigateToPlayer(true, true) }
         profileGraph()
     }
 }

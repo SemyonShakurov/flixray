@@ -1,15 +1,20 @@
 package ru.jintly.feature.auth.register
 
-import android.os.SystemClock
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthCreatePasswordViewModel @Inject constructor() : ViewModel() {
+class AuthCreatePasswordViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
 
-    fun onCompleteAuthClick(onAuthSuccess: () -> Unit) {
-        SystemClock.sleep(1000)
-        onAuthSuccess()
+    private val email: String? = savedStateHandle["email"]
+
+    fun onCompleteAuthClick(password: String, onAuthSuccess: (String, String) -> Unit) {
+        if (password.isNotBlank() && !email.isNullOrBlank()) {
+            onAuthSuccess(password, email)
+        }
     }
 }

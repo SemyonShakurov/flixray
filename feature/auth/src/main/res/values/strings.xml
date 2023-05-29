@@ -18,7 +18,7 @@
     <string name="auth_input_code_message">Проверьте почту!\nВведите код подтверждения</string>
     <string name="auth_input_code_confirm">Подтвердить</string>
     
-    <string name="auth_create_password_complete">Завершить регистрацию</string>
+    <string name="auth_create_password_complete">Продолжить</string>
     <string name="auth_create_password_title">Придумайте пароль</string>
     <string name="auth_create_password_repeat_hint">Введите пароль еще раз</string>
     

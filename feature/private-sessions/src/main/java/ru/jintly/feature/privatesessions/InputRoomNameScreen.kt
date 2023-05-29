@@ -24,19 +24,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.jintly.core.designsystem.colors.Primary
 
 @Composable
 internal fun InputRoomNameRoute(
     onContinueClick: () -> Unit,
+    viewModel: InputRoomNameViewModel = hiltViewModel(),
 ) {
-    InputRoomNameScreen(onContinueClick)
+    InputRoomNameScreen(
+        onContinueClick = { name ->
+            viewModel.onContinueClick(name, onContinueClick)
+        },
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun InputRoomNameScreen(
-    onContinueClick: () -> Unit,
+    onContinueClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var roomName by remember { mutableStateOf("") }
@@ -80,7 +86,7 @@ internal fun InputRoomNameScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            onClick = onContinueClick,
+            onClick = { onContinueClick(roomName) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Primary,
             ),

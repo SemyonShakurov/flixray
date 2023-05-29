@@ -104,22 +104,23 @@ fun App(
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentDestination = navBackStackEntry?.destination
                     topLevelScreens.forEach { screen ->
+                        val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
                         NavigationBarItem(
                             icon = {
                                 Icon(
                                     modifier = Modifier.height(24.dp),
                                     painter = painterResource(id = screen.icon.id),
                                     contentDescription = null,
-                                    tint = Primary,
+                                    tint = if (selected) Primary else Color(0xFF999999),
                                 )
                             },
                             label = {
                                 Text(
                                     text = stringResource(id = screen.titleId),
-                                    color = Primary,
+                                    color = if (selected) Primary else Color(0xFF999999),
                                 )
                             },
-                            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                            selected = selected,
                             colors = NavigationBarItemDefaults.colors(
                                 indicatorColor = Secondary,
                             ),

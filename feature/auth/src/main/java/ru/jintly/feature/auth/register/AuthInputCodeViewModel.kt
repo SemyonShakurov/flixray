@@ -14,16 +14,17 @@ class AuthInputCodeViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
+    private val _code: Int? = savedStateHandle["code"]
     private val email: String? = savedStateHandle["email"]
 
     fun onConfirmCodeClick(
         code: Int,
-        onConfirmCodeSuccess: () -> Unit,
+        onConfirmCodeSuccess: (String) -> Unit,
     ) {
         viewModelScope.launch {
             try {
-                authRepository.confirmCode(email ?: "", code)
-                onConfirmCodeSuccess()
+                authRepository.confirmCode(email ?: "", _code ?: 0)
+                onConfirmCodeSuccess(email ?: "")
             } catch (e: Throwable) {
                 val a = e
             }

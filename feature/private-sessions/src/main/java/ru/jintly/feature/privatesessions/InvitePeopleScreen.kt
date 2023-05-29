@@ -48,12 +48,17 @@ import ru.jintly.feature.privatesessions.data.ProfileInfo
 
 @Composable
 internal fun InvitePeopleRoute(
-    onContinueClick: () -> Unit,
+    onContinueClick: (String, String) -> Unit,
     viewModel: InvitePeopleViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    InvitePeopleScreen(uiState, viewModel::onAddProfileClick, onContinueClick)
+    InvitePeopleScreen(
+        uiState,
+        viewModel::onAddProfileClick,
+        onContinueClick = { viewModel.onContinueClick(onContinueClick) },
+        viewModel::onSearchClick,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,6 +67,7 @@ internal fun InvitePeopleScreen(
     uiState: InvitePeopleUiState,
     onProfileClick: (ProfileInfo) -> Unit,
     onContinueClick: () -> Unit,
+    onSearchClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     if (uiState is InvitePeopleUiState.Success || uiState is InvitePeopleUiState.NSuccess) {
@@ -109,7 +115,10 @@ internal fun InvitePeopleScreen(
                 Button(
                     modifier = Modifier
                         .height(52.dp),
-                    onClick = {},
+                    onClick = {
+                        onSearchClick(input)
+                        input = ""
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Primary,
                     ),

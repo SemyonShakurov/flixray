@@ -2,7 +2,6 @@ package ru.jintly.player.presentation
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +18,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.jintly.core.designsystem.colors.Background
 import ru.jintly.core.designsystem.colors.Primary
 import ru.jintly.core.designsystem.colors.Secondary
@@ -48,14 +49,19 @@ internal fun PlayerRoute(
     modifier: Modifier = Modifier,
     viewModel: PlayerViewModel = hiltViewModel(),
 ) {
+    val messages by viewModel.messagesFlow.collectAsStateWithLifecycle(initialValue = emptyList())
     PlayerScreen(
+        messages = messages,
         modifier = modifier,
+        onSendClick = viewModel::onSendClick,
     )
 }
 
 @Composable
 internal fun PlayerScreen(
+    messages: List<Message>,
     modifier: Modifier = Modifier,
+    onSendClick: (String) -> Unit,
 ) {
     var isVisible by remember { mutableStateOf(false) }
 
@@ -74,28 +80,36 @@ internal fun PlayerScreen(
                 modifier = Modifier
                     .fillMaxSize(),
             )
-            IconButton(
+            Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(end = 12.dp, bottom = 12.dp)
-                    .size(32.dp),
-                onClick = { isVisible = !isVisible },
+                    .size(44.dp)
+                    .background(Color.Black),
             ) {
-                Icon(
-                    modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(id = drawable.ic_chat),
-                    contentDescription = null,
-                    tint = Color.White,
-                )
+                IconButton(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .size(32.dp),
+                    onClick = { isVisible = !isVisible },
+                ) {
+                    Icon(
+                        modifier = Modifier.fillMaxSize(),
+                        painter = painterResource(id = drawable.ic_chat),
+                        contentDescription = null,
+                        tint = Color.White,
+                    )
+                }
             }
         }
         if (isVisible) {
             Chat(
+                messages = messages,
                 modifier = Modifier
                     .animateContentSize()
                     .fillMaxWidth()
                     .weight(2f)
                     .background(Background),
+                onSendClick = onSendClick,
             )
         }
     }
@@ -104,7 +118,9 @@ internal fun PlayerScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Chat(
+    messages: List<Message>,
     modifier: Modifier = Modifier,
+    onSendClick: (String) -> Unit,
 ) {
     var input by remember { mutableStateOf("") }
 
@@ -124,7 +140,7 @@ private fun Chat(
                 .padding(16.dp),
             reverseLayout = true,
         ) {
-            items(MESSAGES) { message ->
+            items(messages) { message ->
                 MessageItem(message)
                 Spacer(modifier = Modifier.height(8.dp))
             }
@@ -149,15 +165,27 @@ private fun Chat(
                 value = input,
                 onValueChange = { input = it },
                 shape = RoundedCornerShape(24.dp),
+                textStyle = LocalTextStyle.current.copy(
+                    color = Color.White,
+                ),
                 trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable { },
-                        painter = painterResource(id = R.drawable.ic_send),
-                        tint = Primary,
-                        contentDescription = null,
-                    )
+                    IconButton(
+                        modifier = Modifier.size(24.dp),
+                        onClick = {
+                            val mess = input
+                            input = ""
+                            if (mess.isNotBlank()) {
+                                onSendClick(mess)
+                            }
+                        },
+                    ) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(id = R.drawable.ic_send),
+                            tint = Primary,
+                            contentDescription = null,
+                        )
+                    }
                 },
             )
         }
@@ -168,26 +196,38 @@ private fun Chat(
 private fun MessageItem(
     message: Message,
 ) {
-    val isOut = message.isOut
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = if (!isOut) Alignment.End else Alignment.Start,
-    ) {
-        Box(
-            modifier = Modifier
-                .background(
-                    if (isOut) Secondary else Primary,
-                    shape = if (!isOut) UserMessageShape else OutMessageShape,
-                )
-                .padding(12.dp, 8.dp),
+    if (!message.isEnter) {
+        val isOut = message.isOut
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = if (!isOut) Alignment.End else Alignment.Start,
         ) {
-            Column(horizontalAlignment = if (!isOut) Alignment.End else Alignment.Start) {
-                if (isOut) {
-                    Text(text = message.profileName, color = Color(0xFFCC8899), fontSize = 12.sp)
+            Box(
+                modifier = Modifier
+                    .background(
+                        if (isOut) Secondary else Primary,
+                        shape = if (!isOut) UserMessageShape else OutMessageShape,
+                    )
+                    .padding(12.dp, 8.dp),
+            ) {
+                Column(horizontalAlignment = if (!isOut) Alignment.End else Alignment.Start) {
+                    if (isOut) {
+                        Text(
+                            text = message.profileName,
+                            color = Color(0xFFCC8899),
+                            fontSize = 12.sp,
+                        )
+                    }
+                    Text(text = message.text, color = Color.White)
                 }
-                Text(text = message.text, color = Color.White)
             }
         }
+    } else {
+        Text(
+            modifier = Modifier.padding(12.dp, 8.dp),
+            text = if (message.isExit) "${message.profileName} вышел из комнаты" else "${message.profileName} присоединился!",
+            color = Color.White,
+        )
     }
 }
 
@@ -197,4 +237,7 @@ private val OutMessageShape = RoundedCornerShape(0.dp, 12.dp, 12.dp, 12.dp)
 private val MESSAGES = listOf(
     Message("Hello from other user!", "qwerty", true),
     Message("Hello from main user!", "zxcvbn", false),
+    Message("", "user 1", isOut = false, true),
+    Message("Hello from main user!", "zxcvbn", false),
+    Message("", "user 1", isOut = false, true, true),
 )
