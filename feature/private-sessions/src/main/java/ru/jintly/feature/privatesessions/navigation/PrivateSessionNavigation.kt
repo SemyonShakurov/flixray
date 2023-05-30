@@ -17,7 +17,7 @@ const val INPUT_ROOM_ROUTE = "input_room_route/{friend1}/{friend2}"
 
 fun NavGraphBuilder.privateSessionsGraph(
     navController: NavController,
-    onContinueClick: () -> Unit,
+    onContinueClick: (String) -> Unit,
 ) {
     navigation(
         route = PRIVATE_SESSIONS_GRAPH,

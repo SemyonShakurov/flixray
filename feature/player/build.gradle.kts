@@ -33,6 +33,7 @@ protobuf {
 
 dependencies {
     implementation(project(":core:design-system"))
+    implementation(project(":core:network"))
 
     implementation(libs.exoPlayer)
     implementation(libs.exoPlayer.hls)

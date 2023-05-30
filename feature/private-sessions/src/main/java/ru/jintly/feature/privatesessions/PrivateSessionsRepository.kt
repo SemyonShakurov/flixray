@@ -20,4 +20,9 @@ class PrivateSessionsRepository @Inject constructor(
                 emailList,
             ),
         ).body()
+
+    suspend fun start(token: String, roomName: String) = networkApi.start(
+        token,
+        roomName,
+    ).body()
 }

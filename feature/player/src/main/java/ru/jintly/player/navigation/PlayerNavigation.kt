@@ -7,10 +7,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import ru.jintly.player.presentation.PlayerRoute
 
-private const val PLAYER_ROUTE = "player_route/{is_private}/{is_admin}"
+private const val PLAYER_ROUTE = "player_route/{is_private}/{is_admin}/{room_name}"
 
-fun NavController.navigateToPlayer(isPrivate: Boolean, isAdmin: Boolean) {
-    this.navigate("player_route/$isPrivate/$isAdmin")
+fun NavController.navigateToPlayer(isPrivate: Boolean, isAdmin: Boolean, roomName: String) {
+    this.navigate("player_route/$isPrivate/$isAdmin/$roomName")
 }
 
 fun NavGraphBuilder.playerScreen() {
@@ -19,6 +19,7 @@ fun NavGraphBuilder.playerScreen() {
         arguments = listOf(
             navArgument("is_private") { type = NavType.BoolType },
             navArgument("is_admin") { type = NavType.BoolType },
+            navArgument("room_name") { type = NavType.StringType },
         ),
     ) {
         PlayerRoute()

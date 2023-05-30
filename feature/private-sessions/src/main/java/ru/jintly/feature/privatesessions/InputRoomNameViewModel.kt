@@ -25,14 +25,15 @@ class InputRoomNameViewModel @Inject constructor(
     private val friend1: String = savedStateHandle["friend1"] ?: ""
     private val friend2: String = savedStateHandle["friend2"] ?: ""
 
-    fun onContinueClick(name: String, onSuccess: () -> Unit) {
+    fun onContinueClick(name: String, onSuccess: (String) -> Unit) {
         dataStore.data
             .map { pref ->
                 pref[TOKEN_KEY] ?: ""
             }
             .onEach { token ->
                 privateSessionsRepository.createRoom(token, name, listOf(friend1, friend2))
-                onSuccess()
+                privateSessionsRepository.start(token, name)
+                onSuccess(name)
             }
             .launchIn(viewModelScope)
     }

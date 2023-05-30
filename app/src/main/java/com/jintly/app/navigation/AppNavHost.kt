@@ -31,12 +31,15 @@ fun AppNavHost(
             },
         )
         publicSessionsGraph(
-            onPublicSessionClick = { navController.navigateToPlayer(false, false) },
+            onPublicSessionClick = { navController.navigateToPlayer(false, false, it) },
+            onPrivateSessionClick = { name, isAdmin ->
+                navController.navigateToPlayer(true, isAdmin, name)
+            },
             nestedGraphs = {
                 playerScreen()
             },
         )
-        privateSessionsGraph(navController) { navController.navigateToPlayer(true, true) }
+        privateSessionsGraph(navController) { navController.navigateToPlayer(true, true, it) }
         profileGraph()
     }
 }

@@ -29,7 +29,7 @@ import ru.jintly.core.designsystem.colors.Primary
 
 @Composable
 internal fun InputRoomNameRoute(
-    onContinueClick: () -> Unit,
+    onContinueClick: (String) -> Unit,
     viewModel: InputRoomNameViewModel = hiltViewModel(),
 ) {
     InputRoomNameScreen(

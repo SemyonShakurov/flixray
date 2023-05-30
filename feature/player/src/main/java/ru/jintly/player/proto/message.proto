@@ -1,0 +1,12 @@
+syntax = "proto3";
+package models;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.goproto_getters_all) = false;
+
+message Message {
+  string Token = 1 [(gogoproto.jsontag) = "token", (gogoproto.moretags) = "binding:\"required,gt=0,max=100\""];
+  string Author = 2 [(gogoproto.jsontag) = "author", (gogoproto.moretags) = "binding:\"required,gt=0,max=50\""];
+  string RoomName = 3 [(gogoproto.jsontag) = "room_name", (gogoproto.moretags) = "binding:\"required,gt=0,max=50\""];
+  string Message = 4 [(gogoproto.jsontag) = "message", (gogoproto.moretags) = "binding:\"required,gt=0,max=200\""];
+}

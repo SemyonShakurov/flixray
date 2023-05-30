@@ -14,7 +14,8 @@ fun NavController.navigateToPublicSessions() {
 }
 
 fun NavGraphBuilder.publicSessionsGraph(
-    onPublicSessionClick: () -> Unit,
+    onPublicSessionClick: (String) -> Unit,
+    onPrivateSessionClick: (String, Boolean) -> Unit,
     nestedGraphs: NavGraphBuilder.() -> Unit,
 ) {
     navigation(
@@ -24,6 +25,7 @@ fun NavGraphBuilder.publicSessionsGraph(
         composable(route = PUBLIC_SESSION_ROUTE) {
             PublicSessionsRoute(
                 onPublicSessionClick = onPublicSessionClick,
+                onPrivateSessionClick = onPrivateSessionClick,
             )
         }
         nestedGraphs()

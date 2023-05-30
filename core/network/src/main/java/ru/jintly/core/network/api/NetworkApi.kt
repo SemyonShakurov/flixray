@@ -47,6 +47,22 @@ interface NetworkApi {
         @Header("Content-Type") contentType: String = "application/json",
     ): Response<Unit>
 
+    @GET(value = "srv/watch/api/start")
+    suspend fun start(
+        @Query("token") token: String,
+        @Query("room_name") roomName: String,
+    ): Response<Unit>
+
+    @GET(value = "srv/watch/api/current_info")
+    suspend fun currentInfo(
+        @Query("token") token: String,
+    ): Response<CurrentInfoResponse>
+
+    @GET(value = "srv/room_api/api/available_rooms")
+    suspend fun availableRooms(
+        @Query("token") token: String,
+    ): Response<List<AvailableRoom>>
+
     companion object {
         internal const val BASE_URL = "http://app.flixray.ru"
     }
@@ -104,4 +120,26 @@ data class CreateRoomRequest(
     val name: String,
     val is_private: Boolean,
     val email_list: List<String>,
+)
+
+@Serializable
+data class CurrentInfoResponse(
+    val rooms: List<Room>,
+)
+
+@Serializable
+data class Room(
+    val name: String,
+    val timing: Int,
+    val duration: Int,
+    val url: String,
+    val users_count: Int,
+    val is_private: Boolean,
+    val admin_name: String,
+)
+
+@Serializable
+data class AvailableRoom(
+    val name: String,
+    val is_private: Boolean,
 )

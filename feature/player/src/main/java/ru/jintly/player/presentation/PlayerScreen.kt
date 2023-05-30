@@ -50,10 +50,16 @@ internal fun PlayerRoute(
     viewModel: PlayerViewModel = hiltViewModel(),
 ) {
     val messages by viewModel.messagesFlow.collectAsStateWithLifecycle(initialValue = emptyList())
+    val event by viewModel.eventFlow.collectAsStateWithLifecycle()
     PlayerScreen(
         messages = messages,
         modifier = modifier,
         onSendClick = viewModel::onSendClick,
+        isPrivate = viewModel.isPrivate,
+        isAdmin = viewModel.isAdmin,
+        event = event,
+        onPlay = viewModel::onPlay,
+        onPause = viewModel::onPause,
     )
 }
 
@@ -62,6 +68,11 @@ internal fun PlayerScreen(
     messages: List<Message>,
     modifier: Modifier = Modifier,
     onSendClick: (String) -> Unit,
+    isPrivate: Boolean,
+    isAdmin: Boolean,
+    event: Event,
+    onPlay: (Long) -> Unit,
+    onPause: (Long) -> Unit,
 ) {
     var isVisible by remember { mutableStateOf(false) }
 
@@ -79,6 +90,11 @@ internal fun PlayerScreen(
             VideoPlayer(
                 modifier = Modifier
                     .fillMaxSize(),
+                isPrivate = isPrivate,
+                isAdmin = isAdmin,
+                event = event,
+                onPlay = onPlay,
+                onPause = onPause,
             )
             Box(
                 modifier = Modifier
@@ -233,11 +249,3 @@ private fun MessageItem(
 
 private val UserMessageShape = RoundedCornerShape(12.dp, 0.dp, 12.dp, 12.dp)
 private val OutMessageShape = RoundedCornerShape(0.dp, 12.dp, 12.dp, 12.dp)
-
-private val MESSAGES = listOf(
-    Message("Hello from other user!", "qwerty", true),
-    Message("Hello from main user!", "zxcvbn", false),
-    Message("", "user 1", isOut = false, true),
-    Message("Hello from main user!", "zxcvbn", false),
-    Message("", "user 1", isOut = false, true, true),
-)
